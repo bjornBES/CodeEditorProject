@@ -1,0 +1,4 @@
+﻿Main STDOUT WriteLine 17:34:34 Hello world
+Main STDOUT WriteLine 17:34:34 Hello
+Explorer STDOUT WriteLine 17:34:35 Opened Workspace: /mnt/EDrive/projects/CodeEditorProject/CodeEditor
+Top palette STDOUT WriteLine 17:34:35 Size 480, 350
