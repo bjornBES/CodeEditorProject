@@ -1,33 +1,18 @@
-﻿Main STDOUT WriteLine 19:42:27 Hello world
-Main STDOUT WriteLine 19:42:27 Hello
-Commands STDOUT WriteLine 19:42:28 seachList: Elapsed time 0 ms commandID = view.status.add.button
-Commands STDOUT WriteLine 19:42:28 seachList: Elapsed time 0 ms commandID = editor.action.open.folder
-Explorer STDOUT WriteLine 19:42:28 Opened Workspace: /mnt/f99d9233-1253-481c-b2b4-9a3f0c96fc12/projects/CodeEditorProject/CodeEditor
-Explorer STDOUT WriteLine 19:42:28 BuildNode: Elapsed 5 ms
-Explorer STDOUT WriteLine 19:42:28 BuildNodeContents: Elapsed 7 ms
-Explorer STDOUT WriteLine 19:42:28 builds: Elapsed 14 ms
-Explorer STDOUT WriteLine 19:42:28 other1: Elapsed 57 ms
-Explorer STDOUT WriteLine 19:42:28 UpdateTreeContents: Elapsed 72 ms
-Explorer STDOUT WriteLine 19:42:28 OpenFolder: Elapsed 75 ms path = /mnt/f99d9233-1253-481c-b2b4-9a3f0c96fc12/projects/CodeEditorProject/CodeEditor
-Commands STDOUT WriteLine 19:42:28 ExecuteCommand: Elapsed time 81 ms commandID = editor.action.open.folder
-Top palette STDOUT WriteLine 19:42:28 Size 480, 350
-Explorer STDOUT WriteLine 19:42:28 BuildNode: Elapsed 3 ms
-Explorer STDOUT WriteLine 19:42:28 BuildNodeContents: Elapsed 6 ms
-Explorer STDOUT WriteLine 19:42:28 builds: Elapsed 10 ms
-Explorer STDOUT WriteLine 19:42:28 other1: Elapsed 73 ms
-Explorer STDOUT WriteLine 19:42:28 UpdateTreeContents: Elapsed 83 ms
-KeybindingManager STDOUT WriteLine 19:42:30 Context switched Explorer
-Top palette STDOUT WriteLine 19:42:31 Size 800, 1064
-KeybindingManager STDOUT WriteLine 19:42:37 Context switched Explorer
-Commands STDOUT WriteLine 19:42:37 seachList: Elapsed time 0 ms commandID = editor.action.open
-AvaloniaEdit STDOUT WriteLine 19:42:37 DocumentLineTree will have height: 1
-AvaloniaEdit STDOUT WriteLine 19:42:37 HeightTree will have height: 1
-AvaloniaEdit STDOUT WriteLine 19:42:37 DocumentLineTree will have height: 11
-AvaloniaEdit STDOUT WriteLine 19:42:37 HeightTree will have height: 11
-Commands STDOUT WriteLine 19:42:37 seachList: Elapsed time 0 ms commandID = view.status.add.button
-Commands STDOUT WriteLine 19:42:37 ExecuteCommand: Elapsed time 0 ms commandID = view.status.add.button
-AvaloniaEdit STDOUT WriteLine 19:42:37 DocumentLineTree will have height: 1
-AvaloniaEdit STDOUT WriteLine 19:42:37 HeightTree will have height: 1
-AvaloniaEdit STDOUT WriteLine 19:42:37 DocumentLineTree will have height: 11
-AvaloniaEdit STDOUT WriteLine 19:42:37 HeightTree will have height: 11
-Commands STDOUT WriteLine 19:42:37 ExecuteCommand: Elapsed time 138 ms commandID = editor.action.open
+﻿Main STDOUT WriteLine 20:04:59 Hello world
+Main STDOUT WriteLine 20:04:59 Hello
+Commands STDOUT WriteLine 20:05:00 seachList: Elapsed time 0 ms commandID = view.status.add.button
+Commands STDOUT WriteLine 20:05:00 seachList: Elapsed time 0 ms commandID = editor.action.open.folder
+Explorer STDOUT WriteLine 20:05:00 Opened Workspace: /mnt/f99d9233-1253-481c-b2b4-9a3f0c96fc12/projects/CodeEditorProject/CodeEditor
+Explorer STDOUT WriteLine 20:05:00 BuildNode: Elapsed 4 ms
+Explorer STDOUT WriteLine 20:05:00 BuildNodeContents: Elapsed 7 ms
+Explorer STDOUT WriteLine 20:05:00 builds: Elapsed 13 ms
+Explorer STDOUT WriteLine 20:05:00 other1: Elapsed 57 ms
+Explorer STDOUT WriteLine 20:05:00 UpdateTreeContents: Elapsed 70 ms
+Explorer STDOUT WriteLine 20:05:00 OpenFolder: Elapsed 74 ms path = /mnt/f99d9233-1253-481c-b2b4-9a3f0c96fc12/projects/CodeEditorProject/CodeEditor
+Commands STDOUT WriteLine 20:05:00 ExecuteCommand: Elapsed time 79 ms commandID = editor.action.open.folder
+Top palette STDOUT WriteLine 20:05:00 Size 480, 350
+Explorer STDOUT WriteLine 20:05:00 BuildNode: Elapsed 3 ms
+Explorer STDOUT WriteLine 20:05:00 BuildNodeContents: Elapsed 6 ms
+Explorer STDOUT WriteLine 20:05:00 builds: Elapsed 9 ms
+Explorer STDOUT WriteLine 20:05:01 other1: Elapsed 70 ms
+Explorer STDOUT WriteLine 20:05:01 UpdateTreeContents: Elapsed 80 ms
