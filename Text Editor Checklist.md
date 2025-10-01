@@ -46,37 +46,34 @@
 
 ### **Phase 3 – UI Design**
 
-* [ ] Design main window layout
-  * [ ] Menu bar
-    * [ ] Recent Files / Folders (quick access).
-      * [ ] Get Sub Sub menus working
-  * [ ] Toolbar with common actions
-  * [/] Tabs layout
-  * [/] Status bar (line/col, file info)
+* [X] Design main window layout
+  * [X] Menu bar
+    * [X] Recent Files / Folders (quick access).
+      * [X] Get Sub Sub menus working
+  * [X] Tabs layout
+  * [X] Status bar (line/col, file info)
 * [X] Apply theme colors consistently
 * [X] Improve spacing/padding for readability
 * [X] Ensure responsive resizing of panels
-* [ ] Minimal icons for buttons/commands
-* [ ] Accessibility considerations (keyboard navigation, font scaling)
+* [X] Minimal icons for buttons/commands
 
 ---
 
 ### **Phase 4 – Developer-Friendly Features**
 
-* [ ] Code navigation
+* [X] Code navigation
   * [X] Word wrap toggle
-  * [ ] Goto line/col
-* [ ] Custom commands
-  * [ ] A basic command palette
+* [X] Custom commands
+  * [X] A basic command palette
   * [X] A basic command system
 
 ---
 
 ### **Phase 5 – Polishing & MVP Release**
 
-* [ ] Performance checks
-  * [ ] Ensure large files open reasonably fast
-  * [ ] Ensure that the app is fast
+* [X] Performance checks
+  * [X] Ensure large files open reasonably fast
+  * [X] Ensure that the app is fast
 * [ ] Cross-platform testing
   * [ ] for Windows and Linux (for now)
 * [ ] Packaged builds (MVP is done)
@@ -143,6 +140,9 @@
   * [ ] Per-folder/project settings (override global settings)
 * [ ] File-specific overrides
   * [ ] Language-specific settings (tab size, auto-indent rules, etc.)
+* [ ] Toolbar with common actions
+* [ ] Accessibility considerations (keyboard navigation, font scaling)
+* [ ] Goto line/col
 
 ---
 
