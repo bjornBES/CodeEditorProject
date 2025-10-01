@@ -49,12 +49,13 @@
 * [ ] Design main window layout
   * [ ] Menu bar
     * [ ] Recent Files / Folders (quick access).
+      * [ ] Get Sub Sub menus working
   * [ ] Toolbar with common actions
-  * [ ] Tabs layout
-  * [ ] Status bar (line/col, file info)
+  * [/] Tabs layout
+  * [/] Status bar (line/col, file info)
 * [X] Apply theme colors consistently
-* [ ] Improve spacing/padding for readability
-* [ ] Ensure responsive resizing of panels
+* [X] Improve spacing/padding for readability
+* [X] Ensure responsive resizing of panels
 * [ ] Minimal icons for buttons/commands
 * [ ] Accessibility considerations (keyboard navigation, font scaling)
 
@@ -63,7 +64,7 @@
 ### **Phase 4 – Developer-Friendly Features**
 
 * [ ] Code navigation
-  * [ ] Word wrap toggle
+  * [X] Word wrap toggle
   * [ ] Goto line/col
 * [ ] Custom commands
   * [ ] A basic command palette

@@ -1,4 +1,93 @@
-﻿Main STDOUT WriteLine 17:34:34 Hello world
-Main STDOUT WriteLine 17:34:34 Hello
-Explorer STDOUT WriteLine 17:34:35 Opened Workspace: /mnt/EDrive/projects/CodeEditorProject/CodeEditor
-Top palette STDOUT WriteLine 17:34:35 Size 480, 350
+﻿Main STDOUT WriteLine 13:36:31 Hello world
+Main STDOUT WriteLine 13:36:31 Hello
+Commands STDOUT WriteLine 13:36:31 seachList: Elapsed time 0 ms commandID = editor.action.open.folder
+Explorer STDOUT WriteLine 13:36:31 Opened Workspace: /media/bjornbes/EDrive/projects/CodeEditorProject/CodeEditor
+Explorer STDOUT WriteLine 13:36:31 BuildNode: Elapsed 3 ms
+Explorer STDOUT WriteLine 13:36:31 BuildNodeContents: Elapsed 5 ms
+Explorer STDOUT WriteLine 13:36:31 builds: Elapsed 8 ms
+Explorer STDOUT WriteLine 13:36:31 other1: Elapsed 39 ms
+Explorer STDOUT WriteLine 13:36:31 UpdateTreeContents: Elapsed 48 ms
+Explorer STDOUT WriteLine 13:36:31 OpenFolder: Elapsed 50 ms path = /media/bjornbes/EDrive/projects/CodeEditorProject/CodeEditor
+Commands STDOUT WriteLine 13:36:32 ExecuteCommand: Elapsed time 55 ms commandID = editor.action.open.folder
+Top palette STDOUT WriteLine 13:36:32 Size 480, 350
+Explorer STDOUT WriteLine 13:36:32 BuildNode: Elapsed 2 ms
+Explorer STDOUT WriteLine 13:36:32 BuildNodeContents: Elapsed 3 ms
+Explorer STDOUT WriteLine 13:36:32 builds: Elapsed 6 ms
+Explorer STDOUT WriteLine 13:36:32 other1: Elapsed 35 ms
+Explorer STDOUT WriteLine 13:36:32 UpdateTreeContents: Elapsed 42 ms
+KeybindingManager STDOUT WriteLine 13:36:35 Context switched Explorer
+KeybindingManager STDOUT WriteLine 13:36:37 Context switched Explorer
+KeybindingManager STDOUT WriteLine 13:36:38 Context switched Explorer
+Commands STDOUT WriteLine 13:36:38 seachList: Elapsed time 0 ms commandID = editor.action.open
+AvaloniaEdit STDOUT WriteLine 13:36:38 DocumentLineTree will have height: 1
+AvaloniaEdit STDOUT WriteLine 13:36:38 HeightTree will have height: 1
+Commands STDOUT WriteLine 13:36:38 seachList: Elapsed time 0 ms commandID = view.status.add.text
+Commands STDOUT WriteLine 13:36:38 ExecuteCommand: Elapsed time 0 ms commandID = view.status.add.text
+AvaloniaEdit STDOUT WriteLine 13:36:38 DocumentLineTree will have height: 5
+AvaloniaEdit STDOUT WriteLine 13:36:38 HeightTree will have height: 5
+Editor STDOUT WriteLine 13:36:38 Tab placement = 0
+Commands STDOUT WriteLine 13:36:38 ExecuteCommand: Elapsed time 108 ms commandID = editor.action.open
+KeybindingManager STDOUT WriteLine 13:36:39 Context switched Explorer
+Commands STDOUT WriteLine 13:36:39 seachList: Elapsed time 0 ms commandID = editor.action.open
+AvaloniaEdit STDOUT WriteLine 13:36:39 DocumentLineTree will have height: 1
+AvaloniaEdit STDOUT WriteLine 13:36:39 HeightTree will have height: 1
+Commands STDOUT WriteLine 13:36:39 seachList: Elapsed time 0 ms commandID = view.status.add.text
+Commands STDOUT WriteLine 13:36:39 ExecuteCommand: Elapsed time 0 ms commandID = view.status.add.text
+AvaloniaEdit STDOUT WriteLine 13:36:39 DocumentLineTree will have height: 7
+AvaloniaEdit STDOUT WriteLine 13:36:39 HeightTree will have height: 7
+Editor STDOUT WriteLine 13:36:39 Tab placement = 1
+Commands STDOUT WriteLine 13:36:39 ExecuteCommand: Elapsed time 36 ms commandID = editor.action.open
+Top palette STDOUT WriteLine 13:36:45 Size 480.59999999999997, 350
+Top palette STDOUT WriteLine 13:36:45 Size 481.2, 350
+Top palette STDOUT WriteLine 13:36:45 Size 496.2, 355
+Top palette STDOUT WriteLine 13:36:45 Size 531.6, 363
+Top palette STDOUT WriteLine 13:36:45 Size 589.8, 370
+Top palette STDOUT WriteLine 13:36:45 Size 658.8, 382.5
+Top palette STDOUT WriteLine 13:36:45 Size 693.6, 391.5
+Top palette STDOUT WriteLine 13:36:45 Size 742.1999999999999, 407
+Top palette STDOUT WriteLine 13:36:45 Size 750.6, 408.5
+Top palette STDOUT WriteLine 13:36:45 Size 753, 410
+Top palette STDOUT WriteLine 13:36:45 Size 757.8, 412.5
+Top palette STDOUT WriteLine 13:36:45 Size 762, 414.5
+Top palette STDOUT WriteLine 13:36:45 Size 767.4, 418
+Top palette STDOUT WriteLine 13:36:45 Size 773.4, 421
+Top palette STDOUT WriteLine 13:36:45 Size 776.4, 421.5
+Top palette STDOUT WriteLine 13:36:45 Size 777, 421.5
+Top palette STDOUT WriteLine 13:36:45 Size 778.1999999999999, 422
+Top palette STDOUT WriteLine 13:36:45 Size 780.6, 424
+Top palette STDOUT WriteLine 13:36:45 Size 786, 425.5
+Top palette STDOUT WriteLine 13:36:45 Size 792.6, 429
+Top palette STDOUT WriteLine 13:36:45 Size 800, 433
+Top palette STDOUT WriteLine 13:36:45 Size 800, 436
+Top palette STDOUT WriteLine 13:36:45 Size 800, 437.5
+Top palette STDOUT WriteLine 13:36:45 Size 800, 438.5
+Top palette STDOUT WriteLine 13:36:45 Size 800, 438.5
+Top palette STDOUT WriteLine 13:36:45 Size 800, 438.5
+Top palette STDOUT WriteLine 13:36:45 Size 800, 438.5
+Top palette STDOUT WriteLine 13:36:45 Size 800, 439
+Top palette STDOUT WriteLine 13:36:45 Size 800, 439.5
+Top palette STDOUT WriteLine 13:36:45 Size 800, 440.5
+Top palette STDOUT WriteLine 13:36:45 Size 800, 444.5
+Top palette STDOUT WriteLine 13:36:45 Size 800, 447
+Top palette STDOUT WriteLine 13:36:45 Size 800, 447.5
+KeybindingManager STDOUT WriteLine 13:36:47 Context switched Explorer
+Commands STDOUT WriteLine 13:36:47 seachList: Elapsed time 0 ms commandID = editor.action.open
+AvaloniaEdit STDOUT WriteLine 13:36:47 DocumentLineTree will have height: 1
+AvaloniaEdit STDOUT WriteLine 13:36:47 HeightTree will have height: 1
+Commands STDOUT WriteLine 13:36:47 seachList: Elapsed time 0 ms commandID = view.status.add.text
+Commands STDOUT WriteLine 13:36:47 ExecuteCommand: Elapsed time 0 ms commandID = view.status.add.text
+AvaloniaEdit STDOUT WriteLine 13:36:47 DocumentLineTree will have height: 6
+AvaloniaEdit STDOUT WriteLine 13:36:47 HeightTree will have height: 6
+Editor STDOUT WriteLine 13:36:47 Tab placement = 2
+Commands STDOUT WriteLine 13:36:47 ExecuteCommand: Elapsed time 24 ms commandID = editor.action.open
+KeybindingManager STDOUT WriteLine 13:36:49 Context switched Explorer
+Commands STDOUT WriteLine 13:36:49 seachList: Elapsed time 0 ms commandID = editor.action.open
+AvaloniaEdit STDOUT WriteLine 13:36:49 DocumentLineTree will have height: 1
+AvaloniaEdit STDOUT WriteLine 13:36:49 HeightTree will have height: 1
+Commands STDOUT WriteLine 13:36:49 seachList: Elapsed time 0 ms commandID = view.status.add.text
+Commands STDOUT WriteLine 13:36:49 ExecuteCommand: Elapsed time 0 ms commandID = view.status.add.text
+AvaloniaEdit STDOUT WriteLine 13:36:49 DocumentLineTree will have height: 7
+AvaloniaEdit STDOUT WriteLine 13:36:49 HeightTree will have height: 7
+Editor STDOUT WriteLine 13:36:49 Tab placement = 3
+Commands STDOUT WriteLine 13:36:49 ExecuteCommand: Elapsed time 30 ms commandID = editor.action.open
+KeybindingManager STDOUT WriteLine 13:36:52 Context switched editor
