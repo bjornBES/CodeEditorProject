@@ -1,18 +1,18 @@
-﻿Main STDOUT WriteLine 16:55:49 Hello world
-Main STDOUT WriteLine 16:55:49 Hello
-Commands STDOUT WriteLine 16:55:50 seachList: Elapsed time 0 ms commandID = view.status.add.button
-Commands STDOUT WriteLine 16:55:50 seachList: Elapsed time 0 ms commandID = editor.action.open.folder
-Explorer STDOUT WriteLine 16:55:50 Opened Workspace: /mnt/f99d9233-1253-481c-b2b4-9a3f0c96fc12/projects/CodeEditorProject/CodeEditor
-Explorer STDOUT WriteLine 16:55:50 BuildNode: Elapsed 17 ms
-Explorer STDOUT WriteLine 16:55:50 BuildNodeContents: Elapsed 8 ms
-Explorer STDOUT WriteLine 16:55:50 builds: Elapsed 26 ms
-Explorer STDOUT WriteLine 16:55:50 other1: Elapsed 92 ms
-Explorer STDOUT WriteLine 16:55:50 UpdateTreeContents: Elapsed 119 ms
-Explorer STDOUT WriteLine 16:55:50 OpenFolder: Elapsed 123 ms path = /mnt/f99d9233-1253-481c-b2b4-9a3f0c96fc12/projects/CodeEditorProject/CodeEditor
-Commands STDOUT WriteLine 16:55:50 ExecuteCommand: Elapsed time 129 ms commandID = editor.action.open.folder
-Top palette STDOUT WriteLine 16:55:50 Size 480, 350
-Explorer STDOUT WriteLine 16:55:50 BuildNode: Elapsed 4 ms
-Explorer STDOUT WriteLine 16:55:50 BuildNodeContents: Elapsed 6 ms
-Explorer STDOUT WriteLine 16:55:50 builds: Elapsed 11 ms
-Explorer STDOUT WriteLine 16:55:50 other1: Elapsed 80 ms
-Explorer STDOUT WriteLine 16:55:50 UpdateTreeContents: Elapsed 92 ms
+﻿Main STDOUT WriteLine 16:58:42 Hello world
+Main STDOUT WriteLine 16:58:42 Hello
+Commands STDOUT WriteLine 16:58:43 seachList: Elapsed time 0 ms commandID = view.status.add.button
+Commands STDOUT WriteLine 16:58:43 seachList: Elapsed time 0 ms commandID = editor.action.open.folder
+Explorer STDOUT WriteLine 16:58:43 Opened Workspace: /mnt/f99d9233-1253-481c-b2b4-9a3f0c96fc12/projects/CodeEditorProject/CodeEditor
+Explorer STDOUT WriteLine 16:58:43 BuildNode: Elapsed 10 ms
+Explorer STDOUT WriteLine 16:58:43 BuildNodeContents: Elapsed 9 ms
+Explorer STDOUT WriteLine 16:58:43 builds: Elapsed 19 ms
+Explorer STDOUT WriteLine 16:58:43 other1: Elapsed 62 ms
+Explorer STDOUT WriteLine 16:58:43 UpdateTreeContents: Elapsed 82 ms
+Explorer STDOUT WriteLine 16:58:43 OpenFolder: Elapsed 86 ms path = /mnt/f99d9233-1253-481c-b2b4-9a3f0c96fc12/projects/CodeEditorProject/CodeEditor
+Commands STDOUT WriteLine 16:58:43 ExecuteCommand: Elapsed time 92 ms commandID = editor.action.open.folder
+Top palette STDOUT WriteLine 16:58:43 Size 480, 350
+Explorer STDOUT WriteLine 16:58:43 BuildNode: Elapsed 3 ms
+Explorer STDOUT WriteLine 16:58:43 BuildNodeContents: Elapsed 6 ms
+Explorer STDOUT WriteLine 16:58:43 builds: Elapsed 10 ms
+Explorer STDOUT WriteLine 16:58:43 other1: Elapsed 76 ms
+Explorer STDOUT WriteLine 16:58:43 UpdateTreeContents: Elapsed 87 ms

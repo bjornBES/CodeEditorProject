@@ -398,7 +398,3 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
-
-logs
-logs/**
-logs/debug_log_all_console.log
