@@ -74,10 +74,9 @@
 * [X] Performance checks
   * [X] Ensure large files open reasonably fast
   * [X] Ensure that the app is fast
-* [ ] Cross-platform testing
-  * [ ] for Windows and Linux (for now)
-* [ ] Packaged builds (MVP is done)
-* [ ] Release MVP build (aka launch day for AAA games)
+* [X] Cross-platform testing
+  * [X] for Windows and Linux (for now)
+* [X] Packaged builds (MVP is done)
 
 ---
 
@@ -90,8 +89,7 @@
 5. Close files
 6. Run commands using the command palette
 7. Use basic keyboard shortcuts
-8. Be able to change settings from the app
-9. Have a clean, usable, and responsive UI
+8. Have a clean, usable, and responsive UI
 
 ---
 
