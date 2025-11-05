@@ -11,21 +11,14 @@ using ReactiveUI;
 using System.Reactive;
 using lib.debug;
 using System.Collections;
-
-public class ExplorerNode
-{
-    public string Header { get; set; }
-    public string Path { get; set; }
-    public List<ExplorerNode> Children { get; set; } = new List<ExplorerNode>();
-    public bool IsDirectory { get; set; }
-}
+using TreeSitter;
 
 public class Explorer : SidePanelElement
 {
     public string WorkspacePath;
 
-    ContextMenu treeItemMenu;
-
+    ContextMenu directoryContextMenu;
+    ContextMenu fileContextMenu;
     TreeView treeView;
     ScrollViewer scrollViewer;
 
@@ -42,7 +35,7 @@ public class Explorer : SidePanelElement
         Header = "Explorer";
         IconKey = "explorerIcon";
         InitializeComponent();
-        Application.Current.Resources["TreeViewItemIndent"] = 2.0;
+        Application.Current.Resources["TreeViewItemIndent"] = 8.0;
     }
 
     public override void EndInit()
@@ -78,7 +71,7 @@ public class Explorer : SidePanelElement
 
         FolderNotOpened.Children.Add(MainPanel);
 
-        FileExplore = new Border() { IsVisible = false };
+        FileExplore = new Border() { IsVisible = false, HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch };
 
         this.Children.Add(FolderNotOpened);
         this.Children.Add(FileExplore);
@@ -86,38 +79,59 @@ public class Explorer : SidePanelElement
         treeView = new TreeView
         {
             IsVisible = true,
-            SelectionMode = SelectionMode.Single
+            SelectionMode = SelectionMode.Single,
+            AutoScrollToSelectedItem = true,
         };
 
         scrollViewer = new ScrollViewer();
 
-        // SelectionChanged: use args.AddedItems to be safe
-        treeView.SelectionChanged += (s, e) =>
+        treeView.Tapped += (s, e) =>
         {
-            IList added = e.AddedItems;
-            if (added == null) return;
-
-            // if added is a TreeViewItem (we construct TreeViewItem), read Tag
-            if (added is TreeViewItem tvItem && tvItem.Tag is ExplorerNode nodeFromTag)
+            if (treeView.SelectedItems.Count == 0)
             {
-                HandleNodeSelected(nodeFromTag, tvItem);
-                e.Handled = true;
-                return;
+                if (treeView.SelectedItems.Count <= 0)
+                {
+                    DebugWriter.WriteLine("Explorer", "No new items added");
+                    return;
+                }
             }
-
-            // if added is ExplorerNode (data model), use it directly
-            if (added is ExplorerNode node)
+            else
             {
-                HandleNodeSelected(node, null);
-                e.Handled = true;
-                return;
+                IList items = treeView.SelectedItems;
+                object added = items[0];
+                if (added == null) return;
+                // if added is a TreeViewItem (we construct TreeViewItem), read Tag
+                if (added is TreeViewItem tvItem && tvItem.Tag is ExplorerNode nodeFromTag)
+                {
+                    if (!tvItem.IsPointerOver)
+                    {
+                        return;
+                    }
+                    HandleNodeSelected(nodeFromTag, tvItem);
+                    e.Handled = true;
+                    return;
+                }
+
+                // if added is ExplorerNode (data model), use it directly
+                if (added is ExplorerNode node)
+                {
+                    HandleNodeSelected(node, null);
+                    e.Handled = true;
+                    return;
+                }
             }
         };
 
-        // simple right-click menu
-        treeItemMenu = new ContextMenu();
         ReactiveCommand<string, Unit> command = ReactiveCommand.Create<string>(PerformCommand);
-        treeItemMenu.Items.Add(new MenuItem { Command = command, CommandParameter = "helloworld", Header = "Hello world" });
+        
+        // simple right-click menu
+        directoryContextMenu = new ContextMenu();
+        directoryContextMenu.Items.Add(new MenuItem { Command = command, CommandParameter = "helloworld", Header = "New File" }); // TODO add function
+        directoryContextMenu.Items.Add(new MenuItem { Command = command, CommandParameter = "helloworld", Header = "New Folder" }); // TODO add function
+        directoryContextMenu.Items.Add(new MenuItem { Header = TopBar.GetSeparator() });
+
+        fileContextMenu = new ContextMenu();
+
 
         UpdateExplore();
     }
@@ -229,13 +243,13 @@ public class Explorer : SidePanelElement
         button.Background = Application.Current.Resources.GetResource("button.background");
 
         button.AddHoverBackground("button.background", "button.hover.background");
-        textBlock.Foreground = Application.Current.Resources.GetResource("sidepanel.foreground") as IBrush;
-        MainPanel.Background = Application.Current.Resources.GetResource("sidepanel.background") as IBrush;
-        Background = Application.Current.Resources.GetResource("sidepanel.background") as IBrush;
+        textBlock.Foreground = Application.Current.Resources.GetResource("sidepanel.foreground");
+        MainPanel.Background = Application.Current.Resources.GetResource("sidepanel.background");
+        Background = Application.Current.Resources.GetResource("sidepanel.background");
 
         if (FileExplore.Child != null && ElementSize.Width > 0 && ElementSize.Height > 0)
         {
-            Height = ElementSize.Height;
+            Height = ElementSize.Height - 48;
             scrollViewer.Height = Height;
         }
     }
@@ -290,7 +304,33 @@ public class Explorer : SidePanelElement
         Stopwatch stopwatch = null;
         if (first) stopwatch = Stopwatch.StartNew();
 
-        TreeViewItem root = new TreeViewItem { Header = node.Header, Tag = node, ContextMenu = treeItemMenu };
+        Grid grid = new Grid();
+        grid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Auto));
+        grid.ColumnDefinitions.Add(new ColumnDefinition(50, GridUnitType.Star));
+        grid.ColumnDefinitions.Add(new ColumnDefinition(25, GridUnitType.Star));
+
+        string path = Path.Combine(AppPaths.DownloadedAssetsDirectoryPath, "explorerIcon");
+        Image image = new Image() { Source = new Avalonia.Media.Imaging.Bitmap(path), Width = 20, Height = 20, Margin = new Thickness(10,0) };
+        Grid.SetColumn(image, 0);
+        grid.Children.Add(image);
+
+        TextBlock title = new TextBlock() { Text = node.Header };
+        Grid.SetColumn(title, 1);
+        grid.Children.Add(title);
+
+        TextBlock status = new TextBlock() { Text = "" };
+        Grid.SetColumn(status, 2);
+        grid.Children.Add(status);
+
+        TreeViewItem root = new TreeViewItem { Header = grid, Tag = node };
+        if (node.IsDirectory)
+        {
+            root.ContextMenu = directoryContextMenu;
+        }
+        else
+        {
+            root.ContextMenu = fileContextMenu;
+        }
 
         foreach (ExplorerNode child in node.Children)
         {

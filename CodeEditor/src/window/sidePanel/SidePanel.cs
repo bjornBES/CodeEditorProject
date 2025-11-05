@@ -1,11 +1,14 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Layout;
 using Avalonia.Media;
+using lib.debug;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Principal;
 
 public class SidePanel : ControlElement<SidePanel>
 {
@@ -13,7 +16,6 @@ public class SidePanel : ControlElement<SidePanel>
 
     public Grid mainGrid;
     private TabControl tabControl;
-    private Button toggleButton;
 
     public GridSplitter Splitter;
     public Dock Dock;
@@ -28,10 +30,10 @@ public class SidePanel : ControlElement<SidePanel>
 
     public SidePanel(Dock dock, double width = 250)
     {
+        Initialize();
         Dock = dock;
         originalColumnWidth = new GridLength(width, GridUnitType.Pixel);
         MinWidth = 170;
-        Initialize();
         InitializeComponent();
     }
 
@@ -43,60 +45,38 @@ public class SidePanel : ControlElement<SidePanel>
         mainGrid = new Grid();
 
         // Two rows: top for toggle button, rest for content
-        mainGrid.RowDefinitions.Add(new RowDefinition(GridLength.Auto));
-        mainGrid.RowDefinitions.Add(new RowDefinition(new GridLength(1, GridUnitType.Star)));
+        mainGrid.RowDefinitions.Add(new RowDefinition(GridLength.Auto)); // button
+        mainGrid.RowDefinitions.Add(new RowDefinition(new GridLength(1, GridUnitType.Star))); // tabs
 
         // TabControl for tabs
         tabControl = new TabControl();
-        Grid.SetRow(tabControl, 1);
-        tabControl.HorizontalAlignment = HorizontalAlignment.Stretch;
-        tabControl.VerticalAlignment = VerticalAlignment.Stretch;
+        Grid.SetColumn(tabControl, 1);
         mainGrid.Children.Add(tabControl);
-
-        tabControl.SizeChanged += (s, e) =>
-        {
-            // keep TabControl filling the row; don't set fixed width from event
-            e.Handled = true;
-        };
-
-        // Toggle button
-        toggleButton = new Button
-        {
-            Width = 20,
-            Height = 20,
-            Content = isCollapsed ? "▶" : "◀",
-            HorizontalAlignment = Dock == Dock.Left ? HorizontalAlignment.Right : HorizontalAlignment.Left,
-            VerticalAlignment = VerticalAlignment.Center,
-            Margin = new Thickness(2)
-        };
-        toggleButton.Click += (_, __) => Toggle();
-        Grid.SetRow(toggleButton, 0);
-        mainGrid.Children.Add(toggleButton);
 
         // GridSplitter: note - in many layouts the splitter belongs in the parent grid; we keep a splitter here in case
         Splitter = new GridSplitter
         {
             Width = 5,
-            HorizontalAlignment = HorizontalAlignment.Right,
-            VerticalAlignment = VerticalAlignment.Stretch,
-            Background = new SolidColorBrush(Colors.Gray)
+            Background = new SolidColorBrush(Colors.Gray),
         };
 
         // SizeChanged handler for the control itself
-        this.PropertyChanged += (s, e) =>
+        SizeChanged += (s, e) =>
         {
-            if (e.Property.Name == nameof(Width) || e.Property.Name == nameof(Height))
+            // DebugWriter.WriteLine("Side panel", $"Size {e.NewSize.Width}, {e.NewSize.Height}");
+            // update element sizes for children
+            foreach (SidePanelElement item in panelElements)
             {
-                // update element sizes for children
-                foreach (SidePanelElement item in panelElements)
-                {
-                    // give elements full available size (you can subtract tab header height if you want)
-                    item.ElementSize = new Size(Width, Height);
-                }
+                e.Handled = true;
+                // give elements full available size (you can subtract tab header height if you want)
+                item.ElementSize = new Size(e.NewSize.Width, e.NewSize.Height);
+                item.Width = e.NewSize.Width;
+                item.Height = e.NewSize.Height;
+                item.UpdateSettings();
             }
         };
 
-        this.Children.Add(mainGrid); // if ControlElement<> is a ContentControl; if not, keep Children.Add(mainGrid)
+        Children.Add(mainGrid); // if ControlElement<> is a ContentControl; if not, keep Children.Add(mainGrid)
         // If it is not a ContentControl, revert to: Children.Add(mainGrid);
     }
 
@@ -111,11 +91,17 @@ public class SidePanel : ControlElement<SidePanel>
             : new GridLength(parentColumn.Width.Value, GridUnitType.Pixel);
     }
 
+
     public void AddItem(string header, Control control)
     {
-        TabItem tabItem = new TabItem() { Header = header, Content = control };
+        TabItem tabItem = new TabItem()
+        {
+            Header = header,
+            Content = control
+        };
         tabControl.Items.Add(tabItem);
     }
+
 
     public void AddItem(SidePanelElement element)
     {
@@ -124,12 +110,18 @@ public class SidePanel : ControlElement<SidePanel>
             Header = element.Header,
             Content = element,
             BorderThickness = new Thickness(0, 0, 0, 1),
-            Name = element.Header
+            Name = element.Header,
+            BorderBrush = Application.Current.Resources.GetResource("sidepanel.icon.border.background")
         };
 
         tabItem.GotFocus += (s, args) =>
         {
-            // handle selection visuals via styles or resources
+            tabItem.BorderBrush = Application.Current.Resources.GetResource("sidepanel.icon.border.selected.background");
+        };
+
+        tabItem.LostFocus += (sender, args) =>
+        {
+            tabItem.BorderBrush = Application.Current.Resources.GetResource("sidepanel.icon.border.background");
         };
 
         // optional icon header
@@ -175,7 +167,6 @@ public class SidePanel : ControlElement<SidePanel>
         col.Width = new GridLength(0);
         Splitter.IsEnabled = false;
         isCollapsed = true;
-        toggleButton.Content = Dock == Dock.Left ? "▶" : "◀";
         Collapsed?.Invoke();
     }
 
@@ -188,7 +179,6 @@ public class SidePanel : ControlElement<SidePanel>
         col.Width = originalColumnWidth;
         Splitter.IsEnabled = true;
         isCollapsed = false;
-        toggleButton.Content = Dock == Dock.Left ? "◀" : "▶";
         Expanded?.Invoke();
     }
 
@@ -202,15 +192,17 @@ public class SidePanel : ControlElement<SidePanel>
 
     public void WindowChangedSize(Size windowSize, Size otherSideSize)
     {
+        DebugWriter.WriteLine("Side panel", $"WindowChangedSize({windowSize}, {otherSideSize})");
         double availableWidth = Math.Max(0, windowSize.Width - otherSideSize.Width);
+        DebugWriter.WriteLine("Side panel", $"availableWidth = {availableWidth}");
 
         double maxAllowedWidth = availableWidth * 0.45d;
+        DebugWriter.WriteLine("Side panel", $"maxAllowedWidth = {maxAllowedWidth} or 170");
         if (maxAllowedWidth < 170)
             maxAllowedWidth = 170;
 
         MaxWidth = maxAllowedWidth;
         MinWidth = 170;
-
         if (parentColumn != null)
         {
             parentColumn.MaxWidth = MaxWidth;

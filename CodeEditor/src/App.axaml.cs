@@ -21,64 +21,26 @@ public class App : Application
         {
             desktop.MainWindow = new MainWindow();
 
-/*
-            Window window = new Window()
-            {
-                Width = 800,
-                Height = 600,
-            };
-            AreaButton areaButton = new AreaButton()
-            {
-                HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
-                VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center,
-            };
-            */
+            /*
+                        Window window = new Window()
+                        {
+                            Width = 800,
+                            Height = 600,
+                        };
+                        AreaButton areaButton = new AreaButton()
+                        {
+                            HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center,
+                            VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center,
+                        };
+                        */
             Styles.Add(new Styles
             {
-                new Style(x => x.OfType(typeof(AreaButton)))
+                new Style(x => x.OfType<TextBlock>())
                 {
-                    Setters = {
-                        new Setter(AreaButton.ContentProperty, "Testing Area"),
-                        new Setter(AreaButton.MinWidthProperty, 200.0d),
-                        new Setter(AreaButton.BackgroundProperty, Brushes.Blue)
-                    },
-                    Children =
+                    Setters =
                     {
-                        new Style(x => x.OfType<AreaButton>().Nesting().Class(":pointerover"))
-                        {
-                            Setters = {
-                                new Setter(AreaButton.ContentProperty, "Pointer over"),
-                                new Setter(AreaButton.BackgroundProperty, Brushes.LightBlue)
-                            }
-                        },
-                        new Style(x => x.OfType<AreaButton>().Nesting().Class(":pointerover"))
-                        {
-                            Setters = {
-                                new Setter(AreaButton.ContentProperty, "Pointer over"),
-                                new Setter(AreaButton.BackgroundProperty, Brushes.LightBlue)
-                            }
-                        },
-
-                        new Style(x => x.OfType<AreaButton>().Nesting().Class(":left"))
-                        {
-                            Setters = {
-                                new Setter(AreaButton.ContentProperty, "Left"),
-                            }
-                        },
-                        new Style(x => x.OfType<AreaButton>().Nesting().Class(":right"))
-                        {
-                            Setters = {
-                                new Setter(AreaButton.ContentProperty, "Right"),
-                            }
-                        },
-                        new Style(x => x.OfType<AreaButton>().Nesting().Class(":middle"))
-                        {
-                            Setters = {
-                                new Setter(AreaButton.ContentProperty, "Middle"),
-                            }
-                        },
+                        new Setter(TextBlock.FontSizeProperty, GetValue(TextBlock.FontSizeProperty) * (double)Current.Resources["allFontScale"])
                     }
-
                 }
             });
             /*

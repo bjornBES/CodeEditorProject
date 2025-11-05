@@ -78,8 +78,6 @@
   * [X] for Windows and Linux (for now)
 * [X] Packaged builds (MVP is done)
 
----
-
 ### At the end of the MVP a user should be able to
 
 1. Open and edit files

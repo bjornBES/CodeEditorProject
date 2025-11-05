@@ -1,6 +1,9 @@
 
 using System.Runtime.CompilerServices;
 using System.Text.Json;
+using DynamicData;
+using lib.debug;
+using Microsoft.Extensions.Primitives;
 
 public class SettingsManager<T> where T : Settings<T>
 {
@@ -9,7 +12,7 @@ public class SettingsManager<T> where T : Settings<T>
     public string GlobalPath;
     public string WorkspacePath;
 
-    public event Action OnConfigChanged;
+    public event Action OnConfigChangedEvent;
     public SettingsManager(string path)
     {
         GlobalPath = path;
@@ -51,7 +54,7 @@ public class SettingsManager<T> where T : Settings<T>
             // Create default workspace file if missing
             SaveToFile(WorkspacePath, default);
         }
-        OnConfigChanged?.Invoke();
+        OnConfigChangedEvent?.Invoke();
     }
 
     public void SaveGlobal()
@@ -105,7 +108,7 @@ public class SettingsManager<T> where T : Settings<T>
             string json = JsonSerializer.Serialize(configs, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(path, json);
         }
-        OnConfigChanged?.Invoke();
+        OnConfigChangedEvent?.Invoke();
     }
 
     /// <summary>
@@ -122,8 +125,23 @@ public class SettingsManager<T> where T : Settings<T>
         WorkspacePath = path;
     }
 
-    public void RunOnConfigChanged()
+    public void RunOnConfigChanged(object sender, FileSystemEventArgs e)
     {
-        OnConfigChanged?.Invoke();
+        if (e.ChangeType == WatcherChangeTypes.Changed)
+        {
+            DebugWriter.WriteLine("Config", $"Config changed in {e.FullPath}");
+
+            try
+            {
+                string json = File.ReadAllText(e.FullPath);
+                Current.ChangedFile(JsonSerializer.Deserialize<T>(json));
+            }
+            catch (JsonException)
+            {
+            }
+
+            OnConfigChangedEvent?.Invoke();
+        }
+
     }
 }

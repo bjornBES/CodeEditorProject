@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Avalonia;
 using Avalonia.Controls;
+using lib.debug;
 using TextMateSharp.Grammars;
 
 public class Editor : Panel
@@ -18,9 +19,9 @@ public class Editor : Panel
         EditorTabControl = new EditorTabControl(EditorService.ActiveGroup, registryOptions);
         Children.Add(EditorTabControl);
 
-        CommandManager.RegisterCommand("Editor copy", "editor.copy", () => {});
-        CommandManager.RegisterCommand("Editor paste", "editor.paste", () => {});
-        CommandManager.RegisterCommand("Editor cut", "editor.cut", () => {});
+        CommandManager.RegisterCommand("Editor copy", "editor.copy", () => { });
+        CommandManager.RegisterCommand("Editor paste", "editor.paste", () => { });
+        CommandManager.RegisterCommand("Editor cut", "editor.cut", () => { });
     }
 
     /// <summary>
@@ -53,10 +54,10 @@ public class Editor : Panel
     /// </summary>
     public void SaveFile()
     {
-        EditorInput active = EditorService.ActiveGroup?.ActiveTab?.Input;
-        if (active is FileEditorInput fileInput)
+        if (GetActiveEditorView(out FileEditorView view))
         {
-            fileInput.Save();
+            EditorInput active = EditorService.ActiveGroup?.ActiveTab?.Input;
+            view.Save();
         }
     }
 
@@ -66,6 +67,7 @@ public class Editor : Panel
     /// <param name="path">The path to the new file</param>
     public void SaveFileAs(string path)
     {
+        DebugWriter.WriteLine("Editor", "Function Not Implemented SaveFileAs");
         EditorInput active = EditorService.ActiveGroup?.ActiveTab?.Input;
         if (active is FileEditorInput fileInput)
         {

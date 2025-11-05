@@ -80,6 +80,7 @@
                   <DynamicResource ResourceKey="TreeViewItemIndent" />
                 </MultiBinding>
               </Grid.Margin>
+              <!--
               <Panel Name="PART_ExpandCollapseChevronContainer"
                      Margin="{StaticResource TreeViewItemExpandCollapseChevronMargin}">
                 <ToggleButton Name="PART_ExpandCollapseChevron"
@@ -87,6 +88,7 @@
                               Focusable="False"
                               IsChecked="{TemplateBinding IsExpanded, Mode=TwoWay}" />
               </Panel>
+              -->
               <ContentPresenter Name="PART_HeaderPresenter"
                                 Grid.Column="1"
                                 Focusable="False"
@@ -167,12 +169,13 @@
     <Style Selector="^:disabled:selected /template/ Border#PART_LayoutRoot > ContentPresenter#PART_HeaderPresenter">
       <Setter Property="Foreground" Value="{DynamicResource TreeViewItemForegroundSelectedDisabled}" />
     </Style>
-
+<!--
     <Style Selector="^:empty /template/ ToggleButton#PART_ExpandCollapseChevron">
       <Setter Property="IsVisible" Value="False" />
     </Style>
     <Style Selector="^:empty /template/ Panel#PART_ExpandCollapseChevronContainer">
       <Setter Property="Width" Value="{StaticResource TreeViewItemExpandCollapseChevronSize}" />
     </Style>
+-->
   </ControlTheme>
 </ResourceDictionary>

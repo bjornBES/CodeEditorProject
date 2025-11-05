@@ -111,7 +111,6 @@ public static class CommandManager
 
         if (commandId.StartsWith("editor"))
         {
-            MainWindow.EditorConfigsSettingsManager.RunOnConfigChanged();
         }
         stopwatch.Stop();
         DebugWriter.WriteLine("Commands", $"ExecuteCommand: Elapsed time {stopwatch.ElapsedMilliseconds} ms commandID = {commandId}");

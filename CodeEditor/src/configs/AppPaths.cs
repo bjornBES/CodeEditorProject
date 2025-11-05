@@ -1,4 +1,8 @@
 
+using System.Diagnostics;
+using Avalonia.Threading;
+using lib.debug;
+
 public static class AppPaths
 {
     #region AppDataPaths
@@ -62,9 +66,13 @@ public static class AppPaths
 
     #endregion
 
+    static FileSystemWatcher ConfigWatcher;
+    static FileSystemWatcher UserProfileWatcher;
+    static FileSystemWatcher WorkspaceWatcher;
 
     public static void EnsureDirectoriesExist()
     {
+
         ensureDirectoryExists(AppDataDirectoryPath);
         ensureDirectoryExists(GlobalStorageDirectoryPath);
 
@@ -76,6 +84,23 @@ public static class AppPaths
 
         ensureDirectoryExists(TempDirectoryPath);
         ensureDirectoryExists(TempCommandDirectoryPath);
+
+        if (ConfigWatcher == null)
+        {
+            ConfigWatcher = new FileSystemWatcher(AppDataDirectoryPath);
+            ConfigWatcher.EnableRaisingEvents = true;
+            ConfigWatcher.IncludeSubdirectories = true;
+            ConfigWatcher.NotifyFilter = NotifyFilters.LastWrite;
+            ConfigWatcher.Changed += OnChanged;
+        }
+        if (UserProfileWatcher == null)
+        {
+            UserProfileWatcher = new FileSystemWatcher(UserProfileDirectoryPath);
+            UserProfileWatcher.EnableRaisingEvents = true;
+            UserProfileWatcher.IncludeSubdirectories = true;
+            UserProfileWatcher.NotifyFilter = NotifyFilters.LastWrite;
+            UserProfileWatcher.Changed += OnChanged;
+        }
 
         if (!string.IsNullOrEmpty(WorkspaceDirectoryPath))
         {
@@ -116,5 +141,34 @@ public static class AppPaths
     public static void SetWorkspacePath(string workspacePath)
     {
         WorkspaceDirectoryPath = workspacePath;
+
+        if (WorkspaceWatcher == null)
+        {
+            WorkspaceWatcher = new FileSystemWatcher(WorkspaceDirectoryPath);
+            WorkspaceWatcher.EnableRaisingEvents = true;
+            WorkspaceWatcher.IncludeSubdirectories = true;
+            WorkspaceWatcher.NotifyFilter = NotifyFilters.LastWrite;
+            WorkspaceWatcher.Changed += OnChanged;
+        }
+    }
+
+    public static void OnChanged(object sender, FileSystemEventArgs e)
+    {
+        if (e.ChangeType == WatcherChangeTypes.Changed)
+        {
+            DebugWriter.WriteLine("Main", $"Changed file {e.FullPath}");
+
+            if (e.FullPath.Equals(GlobalConfigFilePath))
+            {
+                try
+                {
+                    Dispatcher.UIThread.Invoke(new Action(() => MainWindow.EditorConfigsSettingsManager.RunOnConfigChanged(sender, e)));
+                }
+                catch (System.Threading.Tasks.TaskCanceledException)
+                {
+                    return;
+                }
+            }
+        }
     }
 }

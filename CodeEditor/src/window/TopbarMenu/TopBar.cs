@@ -212,12 +212,7 @@ public class TopBar : ControlElement<TopBar>
         MenuNode node = menuNodes[trigger];
         StackPanel container = (StackPanel)node.Submenu.Child;
 
-        Border separator = new Border
-        {
-            Height = 1,
-            Background = Brushes.Gray,
-            Margin = new Thickness(4, 2)
-        };
+        Border separator = GetSeparator();
 
         container.Children.Add(separator);
     }
@@ -320,5 +315,16 @@ public class TopBar : ControlElement<TopBar>
         submenuHost?.Children.Clear();
         if (submenuHost != null)
             submenuHost.IsVisible = false;
+    }
+
+    public static Border GetSeparator()
+    {
+        Border separator = new Border
+        {
+            Height = 1,
+            Background = Brushes.Gray,
+            Margin = new Thickness(4, 2)
+        };
+        return separator;
     }
 }

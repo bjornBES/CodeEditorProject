@@ -81,6 +81,7 @@ public class PipeServer
         }
         catch (Exception ex)
         {
+            DebugWriter.WriteLine("Server", $"Exception {ex.Message} Throwing");
             throw;
         }
         finally

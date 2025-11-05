@@ -4,7 +4,9 @@ namespace lib.debug;
 
 public static class DebugWriter
 {
+    #if DEBUG
     private static TextWriter originalWriter;
+    #endif
 
     private static Dictionary<string, string> AltLogFileName = new Dictionary<string, string>();
     private static Dictionary<string, string> AltLogModule = new Dictionary<string, string>();

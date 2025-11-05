@@ -1,17 +1,54 @@
 # Code Editor Project
 
-## Build
+A lightweight, cross-platform **code editor** built with **.NET 9** and **AvaloniaUI**.
+Fast, extensible, and themeable — designed for developers who love control.
 
-Build it using dotnet 9.0
+## Features
+
+- Syntax highlighting (via TextMate)
+- Extension system for editor plugins
+- Theme support (light/dark + custom)
+- File explorer, tabs and more
+- Works on **Windows** and **Linux**<br>
+_(macOS support planned, not yet tested)_
+
+---
+
+## Build Instructions
+
+Ensure you have the .NET 9 SDK installed.
+
+### Clone the repository
 
 ``` bash
-dotnet publish
+git clone https://github.com/bjornBES/CodeEditorProject.git
+cd CodeEditorProject
 ```
 
-## Usage
+### Build
 
-Run it by doing
+``` bash
+dotnet build -c Release
+```
+
+## Run the Editor
+
+You can run the built application directly:
 
 ``` bash
 ./CodeEditor/bin/Release/net9.0/CodeEditor
 ```
+
+## Extensions
+
+An official extension site is planned for the future.
+For now, developers can explore the **Extension API** [here](./ExtensionLibrary/README.md)
+
+## License
+
+MIT License © 2025 BjornBEs
+
+## Contributing
+
+Contributions are welcome!
+Open issues, submit PRs, or discuss features in the repository’s Discussions tab.

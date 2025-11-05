@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5C295B97-B64
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvaloniaEdit", "lib\AvaloniaEdit\src\AvaloniaEdit.csproj", "{EBE39CB8-6841-40A8-8D86-DE740132606C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeEditor.Tests", "CodeEditor.Tests\CodeEditor.Tests.csproj", "{62E6BC9B-36FA-47D1-A4C6-705305DDCE68}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,6 +105,18 @@ Global
 		{EBE39CB8-6841-40A8-8D86-DE740132606C}.Release|x64.Build.0 = Release|Any CPU
 		{EBE39CB8-6841-40A8-8D86-DE740132606C}.Release|x86.ActiveCfg = Release|Any CPU
 		{EBE39CB8-6841-40A8-8D86-DE740132606C}.Release|x86.Build.0 = Release|Any CPU
+		{62E6BC9B-36FA-47D1-A4C6-705305DDCE68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62E6BC9B-36FA-47D1-A4C6-705305DDCE68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62E6BC9B-36FA-47D1-A4C6-705305DDCE68}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{62E6BC9B-36FA-47D1-A4C6-705305DDCE68}.Debug|x64.Build.0 = Debug|Any CPU
+		{62E6BC9B-36FA-47D1-A4C6-705305DDCE68}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{62E6BC9B-36FA-47D1-A4C6-705305DDCE68}.Debug|x86.Build.0 = Debug|Any CPU
+		{62E6BC9B-36FA-47D1-A4C6-705305DDCE68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62E6BC9B-36FA-47D1-A4C6-705305DDCE68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62E6BC9B-36FA-47D1-A4C6-705305DDCE68}.Release|x64.ActiveCfg = Release|Any CPU
+		{62E6BC9B-36FA-47D1-A4C6-705305DDCE68}.Release|x64.Build.0 = Release|Any CPU
+		{62E6BC9B-36FA-47D1-A4C6-705305DDCE68}.Release|x86.ActiveCfg = Release|Any CPU
+		{62E6BC9B-36FA-47D1-A4C6-705305DDCE68}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

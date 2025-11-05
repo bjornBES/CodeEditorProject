@@ -23,6 +23,8 @@
     <SolidColorBrush x:Key="TabItemHeaderBackgroundSelected" Color="#00FF00"/>
     <SolidColorBrush x:Key="TabItemHeaderBackgroundUnselectedPointerOver" Color="#0000FF"/>
     <SolidColorBrush x:Key="TabItemHeaderBackgroundSelectedPointerOver" Color="#FFFF00"/>
+
+    <x:Double x:Key="allFontScale">1</x:Double>
     <!--
     -->
   </Application.Resources>

@@ -69,38 +69,42 @@ public class EditorTabControl : Panel
         TabItem[] tabItems = _group.Tabs.Select(t =>
         {
             string header = t.Input.Title + (t.Input.IsDirty ? "*" : "");
-            Control content = t.Input switch
+            Control content;
+
+            if (t.View.GetType() == typeof(FileEditorView))
             {
-                FileEditorInput fileInput => new FileEditorView(fileInput, _registryOptions).Also((item) =>
+                FileEditorView item = (FileEditorView)t.View;
+                item.Editor.TextArea.OnCaretPositionChanged += (s, e) =>
                 {
-                    item.Editor.TextArea.OnCaretPositionChanged += (s, e) =>
-                    {
-                        item.UpdateFileInfo(fileInfoTextBlock);
-                    };
-                    item.Editor.TextArea.GotFocus += (s, e) =>
-                    {
-                        e.Handled = true;
-                        t.IsFocused = true;
-                    };
-                                        item.Editor.TextArea.LostFocus += (s, e) =>
-                    {
-                        e.Handled = true;
-                        t.IsFocused = false;
-                    };
-                    item.GotFocus += (s, e) =>
-                    {
-                        e.Handled = true;
-                        t.IsFocused = true;
-                        item.UpdateFileInfo(fileInfoTextBlock);
-                    };
-                    item.LostFocus += (s, e) =>
-                    {
-                        e.Handled = true;
-                        t.IsFocused = false;
-                    };
-                }),
-                _ => new TextBlock { Text = $"Unsupported editor: {t.Input.Title}" }
-            };
+                    item.UpdateFileInfo(fileInfoTextBlock);
+                };
+                item.Editor.TextArea.GotFocus += (s, e) =>
+                {
+                    e.Handled = true;
+                    t.IsFocused = true;
+                };
+                item.Editor.TextArea.LostFocus += (s, e) =>
+                {
+                    e.Handled = true;
+                    t.IsFocused = false;
+                };
+                item.GotFocus += (s, e) =>
+                {
+                    e.Handled = true;
+                    t.IsFocused = true;
+                    item.UpdateFileInfo(fileInfoTextBlock);
+                };
+                item.LostFocus += (s, e) =>
+                {
+                    e.Handled = true;
+                    t.IsFocused = false;
+                };
+                content = item;
+            }
+            else
+            {
+                content = new TextBlock { Text = $"Unsupported editor: {t.Input.Title}" };
+            }
 
             return makeNewTabItem(header, content, count++);
         }).AsArray();

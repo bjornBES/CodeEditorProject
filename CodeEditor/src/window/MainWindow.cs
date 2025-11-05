@@ -14,6 +14,7 @@ using Avalonia.Interactivity;
 using CodeEditor;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using IconPacks.Avalonia;
 public enum DialogType
 {
     OpenFile,
@@ -83,7 +84,7 @@ public partial class MainWindow : Window
 
         UpdateSettings();
 
-        EditorConfigsSettingsManager.OnConfigChanged += OnEditorConfigsChanged;
+        EditorConfigsSettingsManager.OnConfigChangedEvent += OnEditorConfigsChanged;
 
         ReactiveCommand<Unit, Unit> OpenPaltteCommand = ReactiveCommand.Create(OpenPalette);
         KeyBindings.Add(new KeyBinding() { Gesture = new KeyGesture(Key.P, KeyModifiers.Control | KeyModifiers.Shift), Command = OpenPaltteCommand });
@@ -93,6 +94,7 @@ public partial class MainWindow : Window
         {
             if (TopPalette != null)
             {
+                args.Handled = true;
                 Size topbarSize = TopMenu.Bounds.Size;
                 TopPalette.WindowChangedSize(args.NewSize, screenSize, topbarSize);
 
@@ -227,6 +229,9 @@ public partial class MainWindow : Window
 
         Content = rootGrid;
 
+        LeftSidePanel.Expand();
+        RightSidePanel.Expand();
+
         Closed += OnWindowClosed;
         PointerPressed += (s, e) =>
         {
@@ -296,6 +301,19 @@ public partial class MainWindow : Window
             GlobalStorageSettingsManager.SaveGlobal();
         });
 
+        fileMenu.AddSeparator();
+
+        fileMenu.AddItem("Save", () => { CommandManager.ExecuteCommand("editor.action.file.save"); });
+        fileMenu.AddItem("Save As", () => { CommandManager.ExecuteCommand("editor.action.file.saveAs"); });
+        
+        fileMenu.AddSeparator();
+
+        fileMenu.AddItem("Close Editor", () => { CommandManager.ExecuteCommand("editor.action.closeActiveEditor"); });
+
+        fileMenu.AddSeparator();
+
+        fileMenu.AddItem("Exit", Close);
+
         TopBarMenu EditMenu = TopMenu.AddMenu("Edit");
 
         TopBarMenu SelectionMenu = TopMenu.AddMenu("Selection");
@@ -304,18 +322,11 @@ public partial class MainWindow : Window
 
         TopBarMenu HelpMenu = TopMenu.AddMenu("Help");
 
-    }
+        HelpMenu.AddItem("About", () =>
+        {
+            // TODO open a about window
+        });
 
-    public override void EndInit()
-    {
-        base.EndInit();
-        UpdateSettings();
-    }
-
-    protected override void OnLoaded(RoutedEventArgs e)
-    {
-        base.OnLoaded(e);
-        UpdateSettings();
     }
 
     public void OnWindowClosed(object sender, EventArgs e)
@@ -329,11 +340,11 @@ public partial class MainWindow : Window
     {
         Grid mainGrid = new Grid();
 
-        mainGrid.ColumnDefinitions.Add(new ColumnDefinition(new GridLength(250))); // Left panel
+        mainGrid.ColumnDefinitions.Add(new ColumnDefinition(new GridLength(250, GridUnitType.Star))); // Left panel
         mainGrid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Auto));     // Left splitter
         mainGrid.ColumnDefinitions.Add(new ColumnDefinition(new GridLength(1, GridUnitType.Star))); // Editor
         mainGrid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Auto));     // Right splitter
-        mainGrid.ColumnDefinitions.Add(new ColumnDefinition(new GridLength(250))); // Right panel
+        mainGrid.ColumnDefinitions.Add(new ColumnDefinition(new GridLength(250, GridUnitType.Star))); // Right panel
 
         mainGrid.RowDefinitions.Add(new RowDefinition(GridLength.Star)); // Other
         mainGrid.RowDefinitions.Add(new RowDefinition(new GridLength(20))); // Status bar
@@ -344,6 +355,7 @@ public partial class MainWindow : Window
 
         Explorer = new Explorer();
         LeftSidePanel.AddItem(Explorer);
+        // LeftSidePanel.AddItem("Explorer", new TextBlock { Text = "Explorer content" });
         LeftSidePanel.AddItem("Search", new TextBlock { Text = "Search content" });
         Grid.SetRow(LeftSidePanel, 0);
         Grid.SetColumn(LeftSidePanel, 0);
@@ -477,7 +489,7 @@ public partial class MainWindow : Window
 
     public void OnEditorConfigsChanged()
     {
-        CodeEditor.OnConfigChanged();
+        UpdateSettings();
     }
 
     public void UpdateSettings()

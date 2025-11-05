@@ -140,9 +140,10 @@ public class KeybindingManager
             }
 
             code += $"System.Convert.ToInt32({copyContext})";
-
+#pragma warning disable VSTHRD002 // Avoid problematic synchronous waits
             object _result = CSharpScript.EvaluateAsync(code).GetAwaiter().GetResult();
-            // 5. get return value (true or false)
+#pragma warning restore VSTHRD002 // Avoid problematic synchronous waits
+                                 // 5. get return value (true or false)
             result = Convert.ToBoolean(_result);
             DebugWriter.WriteLine("KeybindingManager", $"Result = {result}");
             stopwatch.Stop();

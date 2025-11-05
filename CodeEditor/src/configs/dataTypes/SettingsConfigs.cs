@@ -2,15 +2,19 @@
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
+using Avalonia;
 
 public class EditorConfigs : Settings<EditorConfigs>
 {
     public EditorConfigs()
     {
         Editor = new EditorSection();
+        Window = new WindowSection();
     }
     [JsonPropertyName("editor")]
     public EditorSection Editor { get; set; }
+    [JsonPropertyName("window")]
+    public WindowSection Window { get; set; }
 
     // Free-form extension configs
     [JsonExtensionData]
@@ -117,6 +121,9 @@ public class EditorConfigs : Settings<EditorConfigs>
 
             if (otherConfig.Editor.WordWrap != default)
                 Editor.WordWrap = otherConfig.Editor.WordWrap;
+
+            if (otherConfig.Window.FontScale != 1f)
+                Window.FontScale = otherConfig.Window.FontScale;
         }
 
         // 2. Merge extensions (free-form JSON dictionaries)
@@ -141,6 +148,11 @@ public class EditorConfigs : Settings<EditorConfigs>
                 Extensions[kvp.Key] = kvp.Value;
             }
         }
+    }
+    public override void ChangedFile(EditorConfigs newConfig)
+    {
+        MergeSettings(newConfig);
+        Application.Current.Resources["allFontScale"] = newConfig.Window.FontScale;
     }
 }
 

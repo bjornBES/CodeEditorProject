@@ -38,7 +38,7 @@ public class TopPalette : ControlElement<TopPalette>
         Width = Math.Clamp(desiredWidth, MinWidth, MaxWidth);
         Height = desiredHeight;
 
-        DebugWriter.WriteLine("Top palette", $"Size {Width}, {Height}");
+        // DebugWriter.WriteLine("Top palette", $"Size {Width}, {Height}");
 
         // center horizontally
         double left = (windowSize.Width - Width) / 2;
