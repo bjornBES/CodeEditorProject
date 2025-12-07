@@ -13,7 +13,7 @@ public class Program
         DebugWriter.Initialize(Console.Out);
         DebugWriter.AddModule("Main", "log_Main_console", "Main");
         DebugWriter.AddModulesToLog("Main", "Main.API", "Commands", "KeybindingManager", "Window", "Explorer", "Top palette", "Editor", "Side panel", "Config");
-        DebugWriter.AddModule("AvaloniaEdit", "log_AvaloniaEdit_console", "AvaloniaEdit");
+	    DebugWriter.AddModule("AvaloniaEdit", "log_AvaloniaEdit_console", "AvaloniaEdit");
         Thread serverThread = new Thread(new ThreadStart(StartServer));
         serverThread.Name = "Server Thread";
         serverThread.Start();
