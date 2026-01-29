@@ -20,7 +20,7 @@ public class EditorService
 
         if (buffer.Input is FileEditorInput fileInput)
         {
-            ILanguageClient? client = LspManager.GetClientForFile(fileInput.FilePath);
+            ILanguageClient client = LspManager.GetClientForFile(fileInput.FilePath);
             if (client != null)
             {
                 var session = new DocumentLspSession(fileInput, client);

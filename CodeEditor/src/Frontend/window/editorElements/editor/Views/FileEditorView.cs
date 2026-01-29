@@ -28,7 +28,7 @@ public class FileEditorView : EditorControlView
     private TextMate.Installation textMateInstallation;
     private TextMateSharp.Grammars.Language Language;
     private RegistryOptions registryOptions;
-    private LspClient? lspClient;
+    private LspClient lspClient;
 
     private CompletionWindow completionWindow;
 
@@ -49,7 +49,7 @@ public class FileEditorView : EditorControlView
 
 #pragma warning disable VSTHRD101 // Avoid unsupported async delegates
         Editor.TextChanged += async (_, _) => await OnEditorTextChangedAsync();
-        Editor.TextArea.TextEntered += OnTextEntered;
+        Editor.TextArea.TextEntered += OnTextEnteredAsync;
 #pragma warning restore VSTHRD101 // Avoid unsupported async delegates
 
         Children.Add(Editor);
@@ -85,9 +85,9 @@ public class FileEditorView : EditorControlView
     }
     }
 
-private Editor? GetParentEditor()
+private Editor GetParentEditor()
     {
-        Control? parent = this;
+        Control parent = this;
         while (parent != null && parent != Editor)
             parent = parent.Parent as Control;
         return parent as Editor;
@@ -106,7 +106,7 @@ private Editor? GetParentEditor()
         }
     }
 
-    private async void OnTextEntered(object sender, TextInputEventArgs e)
+    private async void OnTextEnteredAsync(object sender, TextInputEventArgs e)
     {
         Caret caret = Editor.TextArea.Caret;
         if (e.Text == "\n")

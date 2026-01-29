@@ -24,7 +24,7 @@ public class BackendEditor
     {
     }
 
-    public async Task<LspClient?> GetOrStartServerAsync(string languageId)
+    public async Task<LspClient> GetOrStartServerAsync(string languageId)
     {
         var server = LspManager.GetServer(languageId);
         if (server != null)

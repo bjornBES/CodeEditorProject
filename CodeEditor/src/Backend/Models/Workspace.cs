@@ -3,6 +3,7 @@ public class Workspace
 {
     public string Name { get; set; }
     public string Path { get; set; }
+    public int Order { get; set; }
 
     public Workspace(string name, string path)
     {

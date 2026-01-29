@@ -123,7 +123,7 @@ public class Explorer : SidePanelElement
         };
 
         ReactiveCommand<string, Unit> command = ReactiveCommand.Create<string>(PerformCommand);
-        
+
         // simple right-click menu
         directoryContextMenu = new ContextMenu();
         directoryContextMenu.Items.Add(new MenuItem { Command = command, CommandParameter = "helloworld", Header = "New File" }); // TODO add function
@@ -309,10 +309,18 @@ public class Explorer : SidePanelElement
         grid.ColumnDefinitions.Add(new ColumnDefinition(50, GridUnitType.Star));
         grid.ColumnDefinitions.Add(new ColumnDefinition(25, GridUnitType.Star));
 
-        string path = Path.Combine(AppPaths.DownloadedAssetsDirectoryPath, "explorerIcon");
-        Image image = new Image() { Source = new Avalonia.Media.Imaging.Bitmap(path), Width = 20, Height = 20, Margin = new Thickness(10,0) };
-        Grid.SetColumn(image, 0);
-        grid.Children.Add(image);
+        if (node.IsDirectory)
+        {
+            string path = Path.Combine(AppPaths.DownloadedAssetsDirectoryPath, "explorerIcon");
+            Image image = new Image() { Source = new Avalonia.Media.Imaging.Bitmap(path), Width = 20, Height = 20, Margin = new Thickness(10, 0) };
+            Grid.SetColumn(image, 0);
+            grid.Children.Add(image);
+        }
+        else
+        {
+            // TODO:
+            // look at the file ext and pick an icon from there
+        }
 
         TextBlock title = new TextBlock() { Text = node.Header };
         Grid.SetColumn(title, 1);

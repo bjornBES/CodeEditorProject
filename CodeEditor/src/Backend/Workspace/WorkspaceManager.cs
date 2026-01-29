@@ -13,7 +13,7 @@ public class WorkspaceManager
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public static Workspace? OpenWorkspace(string name)
+    public static Workspace OpenWorkspace(string name)
     {
         string[] workspaces = Directory.GetDirectories(_workspacePath);
 
@@ -40,7 +40,7 @@ public class WorkspaceManager
     /// </summary>
     /// <param name="path">path to workspace</param>
     /// <returns>the workspace</returns>
-    static Workspace? openWorkspace(string path)
+    static Workspace openWorkspace(string path)
     {
         string workspaceFile = Path.Combine(path, "workspace.json");
         if (!workspaceExists(path))

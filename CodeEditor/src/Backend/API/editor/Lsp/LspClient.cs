@@ -286,7 +286,7 @@ public class LspClient : ILanguageClient
         try
         {
             // graceful shutdown
-            _ = SendRequestAsync("shutdown", new { }).Result;
+            _ = SendRequestAsync("shutdown", new { }).GetAwaiter().GetResult();
         }
         catch { }
 

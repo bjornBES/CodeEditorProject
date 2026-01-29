@@ -17,7 +17,7 @@ public class OmniSharpCompletionProvider
     private Process _omnisharpProcess;
     private StreamWriter _stdin;
     private StreamReader _stdout;
-    private CompletionWindow? _completionWindow;
+    private CompletionWindow _completionWindow;
 
     public OmniSharpCompletionProvider(TextEditor editor)
     {
@@ -45,10 +45,10 @@ public class OmniSharpCompletionProvider
         _stdin = _omnisharpProcess.StandardInput;
         _stdout = _omnisharpProcess.StandardOutput;
 
-        Task.Run(ListenForResponses);
+        _ = Task.Run(ListenForResponsesAsync);
     }
 
-    private async Task ListenForResponses()
+    private async Task ListenForResponsesAsync()
     {
         while (!_stdout.EndOfStream)
         {
@@ -81,7 +81,7 @@ public class OmniSharpCompletionProvider
         }
     }
 
-    private void OnTextEntered(object? sender, TextInputEventArgs e)
+    private void OnTextEntered(object sender, TextInputEventArgs e)
     {
         if (e.Text == ".")
         {
@@ -89,7 +89,7 @@ public class OmniSharpCompletionProvider
         }
     }
 
-    private void OnTextEntering(object? sender, TextInputEventArgs e)
+    private void OnTextEntering(object sender, TextInputEventArgs e)
     {
         if (_completionWindow != null && e.Text.Length > 0 && !char.IsLetterOrDigit(e.Text[0]))
             _completionWindow.CompletionList.RequestInsertion(e);

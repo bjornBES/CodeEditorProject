@@ -20,13 +20,7 @@ public partial class MainWindow : Window
         {
             return null;
         }
-        if (GlobalStorageSettingsManager.Current.RecentFiles.Contains(path))
-        {
-            GlobalStorageSettingsManager.Current.RecentFiles.Remove(path);
-        }
-        GlobalStorageSettingsManager.Current.RecentFiles.Add(path);
-        CodeEditor.OpenFile(path);
-        GlobalStorageSettingsManager.SaveGlobal();
+        OpenFile(path);
         return path;
     }
     string OpenFile(string path)
@@ -36,7 +30,8 @@ public partial class MainWindow : Window
             GlobalStorageSettingsManager.Current.RecentFiles.Remove(path);
         }
         GlobalStorageSettingsManager.Current.RecentFiles.Add(path);
-        CodeEditor.OpenFile(path);
+        Document document = DocumentManager.OpenDocument(path);
+        CodeEditor.OpenFile(document);
         GlobalStorageSettingsManager.SaveGlobal();
         return path;
     }

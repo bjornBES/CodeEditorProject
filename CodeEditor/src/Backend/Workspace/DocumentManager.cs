@@ -32,6 +32,15 @@ public static class DocumentManager
         return new Document(absFilePath);
     }
 
+    /// <summary>
+    /// Will open a document from the currently opened workspace
+    /// </summary>
+    /// <param name="path">relative path to file</param>
+    public static Document OpenDocumentAbspath(string abspath)
+    {
+        return new Document(abspath);
+    }
+
     public static bool CreateNewDocument(string path)
     {
         return CreateNewDocument(path, WorkspaceManager.currentWorkspace);
@@ -57,7 +66,7 @@ public static class DocumentManager
             File.WriteAllText(absFilePath, "");
             return result;
         }
-        catch (System.Exception ex)
+        catch (System.Exception)
         {
             return false;
         }

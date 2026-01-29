@@ -13,7 +13,7 @@ public class WorkspaceLspManager : IDisposable
         servers[languageId] = client;
     }
 
-    public LspClient? GetServer(string languageId)
+    public LspClient GetServer(string languageId)
     {
         servers.TryGetValue(languageId, out var client);
         return client;

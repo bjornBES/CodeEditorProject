@@ -32,7 +32,7 @@ public class Editor : Panel
     {
     }
 
-    public async Task<LspClient?> GetOrStartServerAsync(string languageId)
+    public async Task<LspClient> GetOrStartServerAsync(string languageId)
     {
         var server = LspManager.GetServer(languageId);
         if (server != null)
@@ -61,6 +61,18 @@ public class Editor : Panel
         EditorBuffer buffer = BackendEditor.NewTextBuffer();
         buffer.View = new FileEditorView((FileEditorInput)buffer.Input);
         Document document = DocumentManager.OpenDocument(path);
+        BackendEditor.OpenFile(document, buffer);
+        buffer.View.UpdateText();
+    }
+
+    /// <summary>
+    /// Opens a file in the editor.
+    /// </summary>
+    /// <param name="path">The path to the file</param>
+    public void OpenFile(Document document)
+    {
+        EditorBuffer buffer = BackendEditor.NewTextBuffer();
+        buffer.View = new FileEditorView((FileEditorInput)buffer.Input);
         BackendEditor.OpenFile(document, buffer);
         buffer.View.UpdateText();
     }

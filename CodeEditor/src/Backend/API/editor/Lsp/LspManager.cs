@@ -12,7 +12,7 @@ public static class LspManager
 
     }
 
-    public static ILanguageClient? GetClientForFile(string filePath)
+    public static ILanguageClient GetClientForFile(string filePath)
     {
         string ext = Path.GetExtension(filePath);
         if (_clients.TryGetValue(ext, out var client))
