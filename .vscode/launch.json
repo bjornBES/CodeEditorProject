@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/CodeEditor/bin/Debug/net9.0/CodeEditor.dll",
+            "program": "${workspaceFolder}/src/host/bin/Debug/net9.0/host.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
             "stopAtEntry": false,

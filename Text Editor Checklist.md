@@ -1,173 +1,186 @@
-# Roadmaps
+# Roadmap
 
-## MVP Roadmap
+## Phase 1 — Core Editing Loop (Foundations)
 
-### **Phase 1 – Core Foundation**
+**Goal:** Make the editor feel “alive” and predictable.
 
-* [X] New File
-* [X] Open File
-* [X] Save / Save As
-* [X] Close tabs.
-* [X] Undo / Redo (multi-level history).
-* [X] Cut / Copy / Paste.
-* [X] Basic systax highlighing
-  * [X] an API for systax highlighing for TextMate
-    * [X] C#, Json, Markdown
-* [X] Basic themes
+**Tasks (5–8):**
 
----
+1. Implement cursor movement commands
 
-### **Phase 2 – Productivity Features**
+   * left / right / up / down
+   * clamp correctly at line boundaries
+2. Implement basic text insertion
 
-* [X] Basic Find / Replace (in current file).
-* [X] Basic Auto-Indent.
-  * [X] Make an API for indentation
-* [X] Line Numbers (AvaloniaEdit).
-* [X] File Explorer
-  * [X] Side bars
-* [X] Tab Multiple Files handling
-  * [X] Pinning tabs
-  * [X] Tab overflow handling
-  * [X] Get Multiple Tabs working
-* [X] Bracket/parenthesis matching
-* [X] Define a basic folder structure
-* [X] Settings
-  * [X] Global User Config
-    * [X] Default font size
-    * [X] Default font family
-    * [X] tab width
-      * [X] Tab or Spaces
-    * [X] Themes
-* [X] Basic Keybindings
-  * [X] Make an API for keybindings
-  * [X] Keybindings Settings
+   * via `TextInput(string)`
+3. Implement deletion commands
+
+   * backspace
+   * delete forward
+4. Implement newline insertion
+
+   * split line at cursor
+5. Ensure snapshot consistency
+
+   * cursor position always valid
+6. Add basic editor invariants
+
+   * no negative positions
+   * cursor never past line length
+7. (Optional) Add simple status logging for commands
+
+**Exit criteria:**
+You can type, move around, and delete text without crashes or weird jumps.
 
 ---
 
-### **Phase 3 – UI Design**
+### Phase 2 — Selection & Structured Editing
 
-* [X] Design main window layout
-  * [X] Menu bar
-    * [X] Recent Files / Folders (quick access).
-      * [X] Get Sub Sub menus working
-  * [X] Tabs layout
-  * [X] Status bar (line/col, file info)
-* [X] Apply theme colors consistently
-* [X] Improve spacing/padding for readability
-* [X] Ensure responsive resizing of panels
-* [X] Minimal icons for buttons/commands
+**Goal:** Enable real editing, not just typing.
 
----
+**Tasks (5–7):**
 
-### **Phase 4 – Developer-Friendly Features**
+1. Add selection model to `TextEditor`
 
-* [X] Code navigation
-  * [X] Word wrap toggle
-* [X] Custom commands
-  * [X] A basic command palette
-  * [X] A basic command system
+   * anchor + active position
+2. Implement selection movement
 
----
+   * shift + arrows
+3. Modify insertion to replace selection
+4. Modify deletion to delete selection
+5. Render selection in snapshots
+6. Add select-all command
+7. Normalize selection invariants
 
-### **Phase 5 – Polishing & MVP Release**
+   * forward/backward selection handling
 
-* [X] Performance checks
-  * [X] Ensure large files open reasonably fast
-  * [X] Ensure that the app is fast
-* [X] Cross-platform testing
-  * [X] for Windows and Linux (for now)
-* [X] Packaged builds (MVP is done)
-
-### At the end of the MVP a user should be able to
-
-1. Open and edit files
-2. Have basic syntax highlighting using Textmate on languages
-3. Do Basic editor functions Copy, Paste, Cut, Undo, Redo and so on
-4. Save and Save as files
-5. Close files
-6. Run commands using the command palette
-7. Use basic keyboard shortcuts
-8. Have a clean, usable, and responsive UI
+**Exit criteria:**
+User can select text, overwrite it, and delete it naturally.
 
 ---
 
-## **Post-MVP – Extensions & Customization Roadmap**
+### Phase 3 — Undo / Redo System
 
-### **Phase 6 – Extensions Support**
+**Goal:** Make editing safe and reversible.
 
-* [ ] Basic Extensions System
-  * [ ] Load extensions from a local folder
-  * [ ] Enable/disable extensions
-  * [ ] Automatic detection of new extensions
-* [ ] Extension structure guidelines
-  * [ ] Define manifest file (name, version, supported languages, commands)
-  * [ ] Define how themes / grammars / commands are packaged
-* [ ] Simple API hooks for extensions
-  * [ ] Add syntax highlighting
-  * [ ] Add editor commands
-  * [ ] Add menu items or toolbar buttons
+**Tasks (6–9):**
 
----
+1. Define an undo able edit model
 
-### **Phase 7 – Extension API**
+   * insert
+   * delete
+   * replace
+2. Record edits per editor or document
+3. Implement undo command
+4. Implement redo command
+5. Merge sequential edits (basic coalescing)
+6. Reset redo stack on new edits
+7. Verify cursor restoration on undo
+8. Snapshot undo state (if needed)
+9. Add debug logging for undo stack
 
-* [ ] Expose editor APIs to extensions
-  * [ ] Access current document content
-  * [ ] Modify document content
-  * [ ] Listen to editor events (file opened, saved, text changed)
-* [ ] Command API
-  * [ ] Register new commands for the command palette
-  * [ ] Register shortcuts for commands
-* [ ] UI API
-  * [ ] Add side panels, status bar items, or overlays
-  * [ ] Add dialogs or notifications
+**Exit criteria:**
+User can confidently edit knowing mistakes are reversible.
 
 ---
 
-### **Phase 8 – Other Customization Options**
+### Phase 4 — Input, Commands & Keybindings
 
-* [ ] Advanced theming
-  * [ ] Load TextMate-compatible themes dynamically
-  * [ ] Allow users to tweak editor colors, fonts, and cursor styles
-* [ ] Keybindings customization
-  * [ ] User-defined shortcuts
-  * [ ] Shortcut profiles
-* [ ] Workspace settings
-  * [ ] Per-folder/project settings (override global settings)
-* [ ] File-specific overrides
-  * [ ] Language-specific settings (tab size, auto-indent rules, etc.)
-* [ ] Toolbar with common actions
-* [ ] Accessibility considerations (keyboard navigation, font scaling)
-* [ ] Goto line/col
+**Goal:** Separate behavior from input cleanly.
 
----
+**Tasks (5–8):**
 
-### **Phase 9 – Polishing Extension Ecosystem**
+1. Finalize engine-level `KeyEvent` model
+2. Replace hardcoded mappings with keybinding table
+3. Implement `KeyChord` (key + modifiers)
+4. Map `KeyChord → CommandId`
+5. Support user-remappable bindings (config file or API)
+6. Add default keybinding profile
+7. Handle command conflicts deterministically
+8. Add fallback behavior for unmapped keys
 
-* [ ] Extension marketplace (optional MVP)
-  * [ ] Local listing of installed extensions
-  * [ ] Enable/disable/update extensions
-* [ ] Extension safety
-  * [ ] Simple sandboxing
-  * [ ] Error handling (prevent crashing the editor)
-* [ ] Documentation & Samples
-  * [ ] Provide sample extension templates
-  * [ ] Document all API methods and hooks
+**Exit criteria:**
+User can rebind keys without changing editor logic.
 
 ---
 
-## Beta Roadmap
+### Phase 5 — Files, Documents & Editor Lifecycle
 
-LSP
+**Goal:** Make it usable across sessions.
 
-Syntax highlighting (Treesitter, LSP)
+**Tasks (5–7):**
 
-## Release Roadmap
+1. Clean up open/save semantics
 
-Polishing UI/UX
+   * always create documents properly
+2. Add save command
+3. Add “dirty” document tracking
+4. Prompt or flag unsaved changes
+5. Support multiple open documents
+6. Support multiple editors per document
+7. Close editor / close document commands
 
-API Polish
+**Exit criteria:**
+User can open, edit, save, and manage multiple files.
 
-## Hotfixes
+---
 
-## Updates
+### Phase 6 — Rendering & UX Polish
+
+**Goal:** Make it pleasant to use.
+
+**Tasks (6–9):**
+
+1. Line number rendering
+2. Scroll model (vertical at minimum)
+3. Cursor blinking
+4. Improve text layout (monospace metrics)
+5. Handle window resizing
+6. Add basic theming (colors, font size)
+7. Optimize snapshot diffing (optional)
+8. Reduce redraw cost (optional)
+9. Visual debug overlay (optional)
+
+**Exit criteria:**
+Editor feels responsive and readable for real work.
+
+---
+
+### Phase 7 — Extensibility & Architecture Hardening
+
+**Goal:** Lock in the architecture so it doesn’t rot.
+
+**Tasks (5–8):**
+
+1. Stabilize public engine interfaces
+2. Add extension hooks (command registration only)
+3. Document core invariants
+4. Add command introspection API
+5. Add basic test harness (headless)
+6. Harden error handling in commands
+7. Decouple workspace construction from engine
+8. Add sample extension
+
+**Exit criteria:**
+The editor can grow without architectural debt exploding.
+
+---
+
+## After All Phases: What a User Can Do
+
+After completing all phases, a user should be able to:
+
+* Open and edit multiple files
+* Type, delete, and move the cursor naturally
+* Select, replace, and manipulate text
+* Undo and redo confidently
+* Customize keybindings
+* Work with multiple editors on the same document
+* Save changes safely
+* Use the editor for real coding or writing tasks
+* Extend behavior via commands (plugins/extensions)
+* Run the editor on different frontends (SDL, Avalonia, etc.)
+
+In short:
+
+> **A real, minimal, extensible code editor — not a toy.**

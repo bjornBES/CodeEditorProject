@@ -1,0 +1,21 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="TextEditorProject.Rendering.backend.Avalonia.AvaloniaApp"
+             RequestedThemeVariant="Default">
+
+  <Application.Resources>
+  </Application.Resources>
+
+  <Application.Styles>
+    <!-- Base theme
+    <FluentTheme/>
+    -->
+    <FluentTheme />
+
+    <!-- AvaloniaEdit theme
+    -->
+    <StyleInclude Source="avares://AvaloniaEdit/Themes/Fluent/AvaloniaEdit.xaml" />
+
+  </Application.Styles>
+
+</Application>

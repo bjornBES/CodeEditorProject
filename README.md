@@ -1,6 +1,6 @@
 # Code Editor Project
 
-A lightweight, cross-platform **code editor** built with **.NET 9** and **AvaloniaUI**.
+A lightweight, cross-platform **code editor** built with **.NET 9**.
 Fast, extensible, and themeable — designed for developers who love control.
 
 ## Features
@@ -9,7 +9,7 @@ Fast, extensible, and themeable — designed for developers who love control.
 - Extension system for editor plugins
 - Theme support (light/dark + custom)
 - File explorer, tabs and more
-- Works on **Windows** and **Linux**<br>
+- Works on **Windows** and **Linux**
 _(macOS support planned, not yet tested)_
 
 ---
@@ -38,11 +38,6 @@ You can run the built application directly:
 ``` bash
 ./CodeEditor/bin/Release/net9.0/CodeEditor
 ```
-
-## Extensions
-
-An official extension site is planned for the future.
-For now, developers can explore the **Extension API** [here](./ExtensionLibrary/README.md)
 
 ## License
 
